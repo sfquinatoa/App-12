@@ -16,7 +16,7 @@ export default function AudioScreen() {
           player.seekTo(0);
           player.play();
         }}
-      />r
+      />
     </View>
   );
 }

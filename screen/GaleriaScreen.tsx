@@ -32,18 +32,29 @@ export default function GaleriaScreen() {
   };
 
   async function subirImagen(){
-    const avatarFile = await new File (image as string).bytes()
-    const { data, error } = await Supabase
-  .storage
-  .from('jugadores')
-  .upload('public/avatar1.png', avatarFile, {
-    contentType:'image/jpeg',
-    cacheControl: 'no-cache',
-    upsert: false
-  })
-  console.log(error);
+    
 
+  const avatarFile = await new File(image as string).bytes();
+
+  const nombreArchivo = `avatar_${Date.now()}.jpg`;
+
+  const { data, error } = await Supabase.storage
+    .from("jugadores")
+    .upload(nombreArchivo, avatarFile, {
+      contentType: "image/jpeg",
+      cacheControl: "3600",
+      upsert: true,
+    });
+
+  console.log("DATA:", data);
+  console.log("ERROR:", error);
+
+  if (error) {
+    Alert.alert("Error", error.message);
+  } else {
+    Alert.alert("Éxito", "Imagen subida correctamente");
   }
+}
 
   return (
     <View style={styles.container}>
