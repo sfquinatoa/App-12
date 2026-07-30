@@ -3,6 +3,9 @@ import { Alert, Button, Image, View, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Supabase } from '../config/SupaBase';
 import { File, Directory, Paths } from 'expo-file-system';
+import { i18n } from '../i18n';
+
+
 
 export default function GaleriaScreen() {
   
@@ -58,12 +61,12 @@ export default function GaleriaScreen() {
 
   return (
     <View style={styles.container}>
-      <Button title="Abrir imagen" onPress={pickImage} />
+      <Button title={i18n.t("open-gallery")} onPress={pickImage} />
       <Button title="Subir imagen" onPress={subirImagen} />
       {image && <Image source={{ uri: image }} style={styles.image} />}
     </View>
   );
-}
+} 
 
 const styles = StyleSheet.create({
   container: {
